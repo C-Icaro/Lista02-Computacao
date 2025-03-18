@@ -268,7 +268,7 @@ Pedidos de R$200,00 ou mais → "Frete grátis!"
 Implemente um pseudocódigo que receba o valor total da compra e exiba a classificação correta do frete para o cliente.
 
 ```javascript
-//Implementação em Portugol?
+//Pseudocódigo? Qual?
 ```
 ______
 

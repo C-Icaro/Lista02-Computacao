@@ -268,7 +268,18 @@ Pedidos de R$200,00 ou mais → "Frete grátis!"
 Implemente um pseudocódigo que receba o valor total da compra e exiba a classificação correta do frete para o cliente.
 
 ```javascript
-//Pseudocódigo? Qual?
+let pedidos = 200;
+if(pedidos < 50){//Condiciona o frete não disponível somente para pedidos abaixo e R$50
+    console.log("Frete não disponível!");
+}
+else if( 50 <= pedidos && pedidos <= 199.99){//Condiciona o frete com custo adicional somente para pedidos entre R$50 e R$199,99.
+    console.log("Frete com custo adicional!");
+}
+else if(pedidos >= 200){//Condiciona o frete grátis somente para pedidos acima de R$200
+     console.log("Frete grátis!");
+}
+
+//Obs: O código não tem saida para valores maiores que 199,99 e menores que 200. 
 ```
 ______
 
@@ -287,6 +298,57 @@ Método CalcularConsumo():
 ```
 Implementação genérica para cálculo de consumo, a ser sobrescrita pelas subclasses.
 Agora, implemente as classes Carro e Moto, garantindo que ambas herdem de Veiculo e possuam métodos específicos para calcular o consumo de combustível com base na quilometragem e eficiência do veículo.
+
+```javascript
+
+class veiculo{
+    modelo;//Definição de atributos
+    ano;
+    quilometragem;
+    eficiencia;
+
+    constructor(modelo, ano, quilometragem, eficiencia){//Definição do constructor pai 
+        this.modelo = modelo;//Definição dos atributos dentro da classe
+        this.ano = ano;
+        this.quilometragem = quilometragem;
+        this.eficiencia = eficiencia;
+    }
+
+    calcularConsumoCombustível(){//Criação do método calcularConsumoCombustível pai
+        let consumo = this.quilometragem/this.eficiencia;
+        console.log("Consumo do veículo, em litros, é:", consumo);
+
+    }
+}
+
+class moto extends veiculo{//Definição da classe e sua herança
+    constructor(modelo, ano, quilometragem, eficiencia){//Definição do constructor
+        super(modelo, ano, quilometragem, eficiencia);//Chamamento do constructor pai
+    }
+
+    calcularConsumoCombustível(){//Sobreescrita do método calcularConsumoCombustível
+        let consumo = this.quilometragem/this.eficiencia;
+        console.log("Consumo da moto, em litros, é:", consumo);
+    }
+}
+
+const suzuki = new moto("Suzuki", "2004", 100, 5);//Criação do objeto da subclasse moto
+suzuki.calcularConsumoCombustível();//Chamamento do método
+
+class carro extends veiculo{//Definição da classe e sua herança
+    constructor(modelo, ano, quilometragem, eficiencia){//Definição do constructor
+        super(modelo, ano, quilometragem, eficiencia);//Chamamento do constructor pai
+    }
+
+    calcularConsumoCombustível(){//Sobreescrita do método calcularConsumoCombustível
+        let consumo = this.quilometragem/this.eficiencia;
+        console.log("Consumo do carro, em litros, é:", consumo);
+    }
+}
+
+const honda = new carro("honda", "2010", 100, 10);//Criação do objeto da subclasse carro
+honda.calcularConsumoCombustível();//Chamamento do método
+```
 ______
 
 **9)** Você é um cientista da NASA e está ajudando no desenvolvimento de um sistema de pouso para sondas espaciais em Marte. Seu objetivo é calcular o tempo necessário para que a sonda reduza sua velocidade até um nível seguro para pouso, considerando uma velocidade inicial de entrada na atmosfera marciana e uma taxa de desaceleração constante causada pelo atrito atmosférico e retrofoguetes.

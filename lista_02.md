@@ -357,9 +357,29 @@ Entretanto, a sonda não pode ultrapassar um tempo máximo de descida para evita
 
 Implemente a lógica dessa simulação em pseudocódigo, considerando a seguinte equação para atualização da velocidade:
 
-Considere a fórumla de atualização velocidade:
-```
-    velocidade = velocidadeInicial - desaceleracao * tempo
+Considere a fórumla de atualização velocidade: velocidade = velocidadeInicial - desaceleracao * tempoAtual;
+
+```JavaScript
+
+var tempoMaximo = 20;//Definição do tempo máximo
+var tempoMinimo = 5;//Definição do tempo mínimo
+var tempoDescida = Math.round(Math.random() * (tempoMaximo - tempoMinimo)) + tempoMinimo;//Definição do tempo de descida aleatório entre minimo e máximo segundos
+Math.floor(tempoDescida);//Arredonda o número para baixo, transformando em inteiro
+var tempoAtual = 0;//Definição do tempo atual
+
+var velocidadeInicial = 100;//Definição da velocidade inicial
+var velocidadeSegura = 20;
+
+var desaceleracao = velocidadeInicial/tempoDescida;//Definição da desaceleração
+
+var velocidade = velocidadeInicial - desaceleracao * tempoAtual;
+
+console.log("A velocidade inicial é:", velocidadeInicial, "metros por segundo.");//Imprime a velocidade inicial
+console.log("A velocidade segura de pouso é:", velocidadeSegura, "metros por segundo.");//Imprime a velocidade inicial
+console.log("A desaceleração é:", desaceleracao.toPrecision(3), "metros por segundo.");//Imprime a velocidade inicial
+
+console.log(`O tempo para atingir a velocidade segura é: ${tempoDescida} segundos.`);//Imprime a velocidade inicial
+
 ```
 Seu programa deve determinar quanto tempo será necessário para que a sonda atinja uma velocidade segura de pouso, sem ultrapassar os limites estabelecidos.
 ______
@@ -394,3 +414,39 @@ Escrever("Total de investimentos acumulados:")
 ImprimirMatriz(totalInvestimentos)  
 ```
 Agora, implemente a função MultiplicarMatrizesInvestimento(matrizA, matrizB), que multiplica as duas matrizes, simulando o efeito de diferentes fatores de crescimento e impacto financeiro nos investimentos ao longo do tempo.
+
+```JavaScript
+    // Definição das matrizes:
+    // A matriz A representa os investimentos no setor de tecnologia (primeira linha) e industria (segunda linha) em milhões de reais
+    // A matriz B representa os fatores que influenciam esse investimento como Juros compostos (coluna 1), expansão do mercado (coluna 2) e valorização de ações (coluna 3) no periodo de 1 ano.
+    var matrizA = [[2, 3], [4, 6]];
+    var matrizB = [[1, 3, 0], [2, 1, 1]]; //Matriz B com 2 linhas e 3 colunas, para testar a multiplicação correta de matrizes 
+    //var matrizB = [[1, 3, 0], [2, 1, 1], [3, 0, 2]]; //Matriz B com 3 linhas e 3 colunas, para testar a multiplicação incorreta de matrizes
+    var linhasA = matrizA.length;
+    var colunasA = matrizA[0].length;
+    var linhasB = matrizB.length;
+    var colunasB = matrizB[0].length;
+    var matrizResultado = [[0, 0, 0], [0, 0, 0]];
+
+    // Verifica se as matrizes podem ser multiplicadas
+    console.log("A matriz A é:", matrizA);//Informa as matrizes no console log
+    console.log("A matriz B é:", matrizB);//Informa as matrizes no console log
+    console.log("As dimensões das matrizes são:", linhasA, "x", colunasA, "e", linhasB, "x",colunasB);//Informa as dimensões das matrizes no console log
+    if (colunasA != linhasB) {
+        console.log("As matrizes não podem ser multiplicadas. O número de colunas da primeira matriz deve ser igual ao número de linhas da segunda matriz.");
+    }
+    else{
+        // Loop para percorrer cada elemento das matrizes e calcular o produto
+        for (var i = 0; i < linhasA; i++) {//Passa por cada linha A
+            for (var j = 0; j < colunasB; j++) {//Passa por cada coluna de B
+                for (var k = 0; k < colunasA; k++) {//Passa por cada coluna de A
+                    // Multiplica os elementos correspondentes e soma na matriz resultado
+                    matrizResultado[i][j] += matrizA[i][k] * matrizB[k][j];
+                }
+            }
+        }
+        console.log("O resultado da multiplicação das matrizes é:", matrizResultado);//Informa a multiplicação das matrizes no console log
+        
+        console.log("\nA matriz resultado reflete os ganhos acumulados (em milhões de reais) de cada investimento da matriz A em relação aos fatores apresentados na matriz B, ao longo do tempo.");
+    }
+```
